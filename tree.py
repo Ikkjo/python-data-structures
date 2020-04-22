@@ -3,8 +3,8 @@ from queue import Queue
 
 class TreeNode(object):
 
-    def __init__(self, value=None, parent=None):
-        self._value = value
+    def __init__(self, data=None, parent=None):
+        self._data = data
         self._parent = parent
         self._children = []
 
@@ -32,12 +32,12 @@ class TreeNode(object):
         self._children.append(node)
 
     @property
-    def value(self):
-        return self._value
+    def data(self):
+        return self._data
 
-    @value.setter
-    def value(self, new_value):
-        self._value = new_value
+    @data.setter
+    def data(self, new_data):
+        self._data = new_data
 
     def is_leaf(self):
         return len(self._children) == 0
@@ -66,7 +66,7 @@ class Tree(object):
         self._root = new_root
 
     def is_empty(self):
-        return True if self._root is None else False
+        return self._root is None
 
     def is_root(self, node):
         return node == self._root
@@ -104,11 +104,10 @@ class Tree(object):
             for child in node.children:
                 queue.enqueue(child)
 
-def make_tree(root_value):
-    root = TreeNode(value=root_value)
-    tree = Tree(root)
-    return tree
 
+def make_tree(root_data):
+    root = TreeNode(data=root_data)
+    return Tree(root)
 
 
 if __name__ == '__main__':
@@ -116,8 +115,3 @@ if __name__ == '__main__':
     root = a.root
 
     root.child = ()
-
-
-
-
-

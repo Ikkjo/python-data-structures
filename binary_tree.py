@@ -1,3 +1,5 @@
+from queue import Queue
+
 class BTNodeException(Exception):
     """Base class for BTNode Exceptions"""
     pass
@@ -86,5 +88,67 @@ class BinaryTree(object):
         return self._root
 
     @root.setter
-    def root(self, value):
-        pass
+    def root(self, new_root):
+        self._root = new_root
+
+    def is_empty(self):
+        return self._root is None
+
+    def is_root(self, node):
+        return node == self._root
+
+    def preorder(self, function):
+        self._pretorder(function, self._root)
+
+    def _preorder(self, function, node):
+
+        function(node)
+
+        if node.l_child is not None:
+            self._preorder(function, node.l_child)
+
+        if node.r_child is not None:
+            self._preorder(function, node.r_child)
+
+    def inorder(self, function):
+        self._inorder(function, self._root)
+
+    def _inorder(self, function, node):
+
+        if node.l_child is not None:
+            self._preorder(function, node.l_child)
+
+        function(node)
+
+        if node.r_child is not None:
+            self._preorder(function, node.r_child)
+
+    def postorder(self, function):
+        self._postorder(function, self._root)
+
+    def _postorder(self, function, node):
+
+        if node.l_child is not None:
+            self._preorder(function, node.l_child)
+
+        if node.r_child is not None:
+            self._preorder(function, node.r_child)
+
+        function(node)
+
+    def breadth_first(self, function):
+        queue = Queue()
+        queue.enqueue(self._root)
+
+        while not queue.is_empty():
+            node = queue.dequeue()
+            function(node)
+            if node.l_child is not None:
+                queue.enqueue(node.l_child)
+            if node.r_child is not None:
+                queue.enqueue(node.r_child)
+
+def make_btree(root_data):
+    bt_root = BTNode(root_data)
+    return BinaryTree(bt_root)
+
