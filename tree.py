@@ -1,4 +1,4 @@
-from queue import Queue
+from qu import Qu
 
 
 class TreeNode(object):
@@ -95,7 +95,7 @@ class Tree(object):
             self._preorder(child, function)
 
     def breadth_first(self, function):
-        queue = Queue()
+        queue = Qu()
         queue.enqueue(self._root)
 
         while not queue.is_empty():
@@ -108,10 +108,3 @@ class Tree(object):
 def make_tree(root_data):
     root = TreeNode(data=root_data)
     return Tree(root)
-
-
-if __name__ == '__main__':
-    a = make_tree(22)
-    root = a.root
-
-    root.child = ()

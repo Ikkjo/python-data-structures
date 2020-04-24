@@ -6,7 +6,7 @@ class QueueError(Exception):
 class EmptyQueueException(QueueError):
     """:raises Empty stack exception"""
 
-class Queue(object):
+class Qu(object):
 
     def __init__(self):
         self._queue = []

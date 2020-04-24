@@ -14,24 +14,8 @@ class UnoNode(object):
     def __next__(self):
         return self._next
 
-    @property
-    def value(self):
-        return self._value
-
-    @value.setter
-    def value(self, new_value):
-        self._value = new_value
-
-    @property
-    def next(self):
-        return self._next
-
-    @next.setter
-    def next(self, new_next):
-        self._next = new_next
-
     def __eq__(self, other):
-        return self._value == other.value
+        return self._value == other.get_value if isinstance(other, UnoNode) else self._value == other
 
     def __str__(self):
         return str(self._value)
@@ -125,12 +109,16 @@ class SLinkedList(object):
             self[index - 1].set_next(self[index + 1])
             self._size -= 1
 
+        return self[index]
+
     def is_empty(self):
         return self._size == 0
 
     def extend(self, s_linked_list):
         if len(s_linked_list) != 0:
             self[-1].set_next(s_linked_list[0])
+            return True
+        return False
 
     def append(self, value):
 
@@ -180,6 +168,17 @@ class SLinkedList(object):
 
             self[index - 1].set_next(new_node)
             new_node.set_next(self[index])
+
+    def index(self, value):
+        """
+        :param value: Value of item in list
+        :return: index (int) of that item in the list
+        """
+        index = 0
+        for item in self:
+            if value == item:
+                return index
+            index += 1
 
 
 # ============================================================================================================
@@ -260,12 +259,16 @@ class DoublyLinkedList(object):
 
 if __name__ == '__main__':
 
-    a = DoublyLinkedList()
+    a = SLinkedList()
 
     a.append("burek")
 
     a.append("pica")
 
     a.append("pica burek :O")
+
+    a[1] == 'pica'
+
+    b = a.index("pica")
 
     pass

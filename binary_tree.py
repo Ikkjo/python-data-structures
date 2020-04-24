@@ -1,4 +1,4 @@
-from queue import Queue
+from qu import Qu
 
 class BTNodeException(Exception):
     """Base class for BTNode Exceptions"""
@@ -137,7 +137,7 @@ class BinaryTree(object):
         function(node)
 
     def breadth_first(self, function):
-        queue = Queue()
+        queue = Qu()
         queue.enqueue(self._root)
 
         while not queue.is_empty():
